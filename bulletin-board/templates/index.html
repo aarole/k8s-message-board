@@ -1,44 +1,72 @@
-<html>
-	<head>
-		<title>Bulletin Board</title>
-		<style>
-			body       { font-family: "Arial", sans-serif; font-size: 20px; color: #00a2ff; }
-			a, h1, h2  { color: #8f0000d2; }
-			.heading  { font-weight: bold; }
-			.split { height: 100%; width: 50%; position: fixed; z-index: 1; top: 0; overflow-x: hidden; padding-top: 20px; }
-			.left { left: 0; padding-left: 10px; }
-			.right { right: 0; padding-left: 10px; }
-			.message     { margin-bottom: -40px; padding-bottom: 3em; border-bottom: 1px solid rgb(0, 0, 0); }
-			input[type=text] { margin: .5em 0; padding: .5em; font-size: 12px; color: #777; width: 200px;}
-			input[type=textarea] { margin: .5em 0; padding: .5em; font-size: 12px; color: #777; width: 200px;}
-		</style>
-	</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 450px;
+  padding-left: 20px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(57, 122, 216);
+  
+}
+
+.content {
+  margin-left: 450px;
+  padding-left: 40px;
+}
+</style>
+</head>
+	
 	<body>
-		{% block content %}
-			<div class="split left">
-				<h2>Post Message</h2>
+		
+			<div class="sidenav">
+				
+				<h2>Create a post</h2>
 				<form action="/messages" method=post>
 					<p class="heading">Name: <input type=text name=name>
 					<p class="heading">Email: <input type=text name=email>
 					<p class="heading">Message:
 					<textarea rows=10 cols=50 name=message></textarea></p>
-					<p><input type=submit value="Post Message"></p>
+					<p><input type=submit value="Post"></p>
 				</form>
+				<br><br>
+				
 			</div>
 
-			<div class="split right">
-				<h2>Posted:</h2>
+			<div class="content">
+				<h2>Forum:</h2>
 				{% for message in messages %}
+				<hr>
 					<p class=message>
+						Message ID: {{ message.id }}<br>
 						<b>{{ message.name }} &lt;<i>{{ message.email }}</i>&gt;</b>
 						<br><br>
 						{{ message.message }}
 						<form action="/delete/{{ message.id }}" method=get>
-							<input type=submit value="Delete Message">
+							<input type=submit value="Delete">
 						</form>
 					</p>
+				<hr>
+				
 				{% endfor %}
 			</div>
-		{% endblock %}
+			
+		
 	</body>
 </html>
