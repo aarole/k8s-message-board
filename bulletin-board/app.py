@@ -38,9 +38,8 @@ def messages():
 	db.message.insert_one({"name": name,"email": email, "message": message})
 	return redirect(url_for("index"))
 
-@app.route("/delete", methods=["POST"])
-def delete():
-	id = request.form.get("id")
+@app.route("/delete/<id>", methods=["GET"])
+def delete(id):
 	db.message.delete_one({"_id": ObjectId(id)})
 	return redirect(url_for("index"))
 
