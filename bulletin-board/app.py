@@ -18,7 +18,6 @@ def get_messages():
 		item = {
 			"id": str(message["_id"]),
 			"name": message["name"],
-			"email": message["email"],
 			"message": message["message"]
 		}
 		data.append(item)
@@ -33,9 +32,8 @@ def index():
 @app.route("/messages", methods=["POST"])
 def messages():
 	name = request.form.get("name")
-	email = request.form.get("email")
 	message = request.form.get("message")
-	db.message.insert_one({"name": name,"email": email, "message": message})
+	db.message.insert_one({"name": name, "message": message})
 	return redirect(url_for("index"))
 
 @app.route("/delete/<id>", methods=["GET"])

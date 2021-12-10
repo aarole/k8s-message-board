@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+<title>Message Forum</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -39,10 +39,9 @@ body {
 				
 				<h2>Create a post</h2>
 				<form action="/messages" method=post>
-					<p class="heading">Name: <input type=text name=name>
-					<p class="heading">Email: <input type=text name=email>
+					<p class="heading">Username: <input type=text name=name>
 					<p class="heading">Message:
-					<textarea rows=10 cols=50 name=message></textarea></p>
+					<textarea rows=10 cols=50 name=message style="resize: none;"></textarea></p>
 					<p><input type=submit value="Post"></p>
 				</form>
 				<br><br>
@@ -52,9 +51,7 @@ body {
 			<div class="content">
 				<h2>Forum:</h2>
 				{% for message in messages %}
-				<hr>
 					<p class=message>
-						Message ID: {{ message.id }}<br>
 						<b>{{ message.name }} &lt;<i>{{ message.email }}</i>&gt;</b>
 						<br><br>
 						{{ message.message }}

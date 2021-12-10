@@ -1,4 +1,4 @@
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: flask-app-hpa
@@ -9,4 +9,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: flask-app
-  targetCPUUtilizationPercentage: 30
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50
