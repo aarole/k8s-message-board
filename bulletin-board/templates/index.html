@@ -52,7 +52,7 @@
 				<h2>Forum:</h2>
 				{% for message in messages %}
 					<p class=message>
-						<b>{{ message.name }} &lt;<i>{{ message.email }}</i>&gt;</b>
+						<b>{{ message.name }}</b>
 						<br><br>
 						{{ message.message }}
 						<form action="/delete/{{ message.id }}" method=get>
